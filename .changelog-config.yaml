@@ -3,7 +3,7 @@
 # User variables for reference in other parts of the configuration.
 variables:
   changelog_filename: CHANGELOG.md
-  repo_url: https://github.com/dmi-feo/canada
+  repo_url: https://github.com/dmi-feo/testcontainers-yt-local
 
 # Pipeline to find the most recent tag for incremental changelog generation.
 # Leave empty to always start at first commit.
