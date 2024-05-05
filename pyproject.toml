@@ -5,7 +5,7 @@ authors = [
 ]
 requires-python = ">=3.8"
 license = {text = "Apache 2.0"}
-version = "0.0.1"
+version = "0.0.0"
 dependencies = [
     "testcontainers < 3.8",
     "ytsaurus-client < 0.14",
@@ -16,6 +16,34 @@ tests = [
     "pytest < 9",
     "requests < 3",
 ]
+release = [
+    "bump-my-version == 0.18.3",
+    "generate-changelog == 0.10.0",
+]
 
 [tool.setuptools.packages.find]
 where = ["."]
+
+[tool.setuptools.dynamic]
+version = {attr = "testcontainers_yt_local.__version__"}
+
+[tool.bumpversion]
+current_version = "0.10.0"
+commit = true
+commit_args = "--no-verify"
+tag = true
+tag_name = "{new_version}"
+message = "New version: {new_version} [changelog-ignore]"
+allow_dirty = true
+
+[[tool.bumpversion.files]]
+filename = "testcontainers_yt_local/__init__.py"
+
+[[tool.bumpversion.files]]
+filename = "CHANGELOG.md"
+search = "Unreleased"
+
+[[tool.bumpversion.files]]
+filename = "CHANGELOG.md"
+search = "{current_version}...HEAD"
+replace = "{current_version}...{new_version}"
