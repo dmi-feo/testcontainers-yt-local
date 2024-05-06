@@ -11,6 +11,8 @@ jobs:
       url: https://pypi.org/p/testcontainers-yt-local
     permissions:
       id-token: write
+      contents: write
+      pull-requests: write
     steps:
       - name: "Checkout code"
         uses: actions/checkout@v4
