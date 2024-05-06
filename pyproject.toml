@@ -1,5 +1,7 @@
 [project]
 name = "testcontainers-yt-local"
+description = "Testcontainer for Yt"
+readme =
 authors = [
     {name = "Dmitriy Fedorov"},
 ]
