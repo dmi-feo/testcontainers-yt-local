@@ -60,6 +60,9 @@ jobs:
           custom_tag: ${{ steps.tag.outputs.tag }}
           tag_prefix: ""
 
+      - name: "checkout to main branch"
+        run: git checkout main && git pull
+
       - name: Install pypa/build
         run: >-
           python3 -m
