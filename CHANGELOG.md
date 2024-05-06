@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.5.0 (2024-05-06)
+
+[Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.4.0...0.5.0)
+
+### Changes
+
+- One more release fix. [ece38d6](https://github.com/dmi-feo/testcontainers-yt-local/commit/ece38d6a39febda74ccbabadc00cee275a29eb57)
+    
+- Maybe fix pypi version. [34f0fd4](https://github.com/dmi-feo/testcontainers-yt-local/commit/34f0fd4b348a87d7547e8c1764bf8f2eeb33a758)
+    
+
 ## 0.4.0 (2024-05-06)
 
 [Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.3.0...0.4.0)
