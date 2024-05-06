@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0 (2024-05-06)
+
+[Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.2.0...0.3.0)
+
+### Changes
+
+- Update release.yaml. [eb6d403](https://github.com/dmi-feo/testcontainers-yt-local/commit/eb6d403bff264dbbb0627bcc42decbb469d1b692)
+    
+
 ## 0.2.0 (2024-05-06)
 
 [Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.1.0...0.2.0)
