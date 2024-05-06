@@ -9,6 +9,8 @@ jobs:
     environment:
       name: pypi
       url: https://pypi.org/p/testcontainers-yt-local
+    permissions:
+      id-token: write
     steps:
       - name: "Checkout code"
         uses: actions/checkout@v4
