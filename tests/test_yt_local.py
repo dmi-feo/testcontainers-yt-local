@@ -25,3 +25,9 @@ def test_two_containers():
             url = f"http://{yt.get_container_host_ip()}:{yt.get_exposed_port(YtLocalContainer.PORT_HTTP)}/ping"
             r = requests.get(url)
             assert r.status_code == 200
+
+
+def test_config_override():
+    with YtLocalContainer() as yt:
+        yt_cli = yt.get_client(config={"prefix": "//tmp"})
+        assert yt_cli.config["prefix"] == "//tmp"

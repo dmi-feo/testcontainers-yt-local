@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Optional, Dict
 
 from yt.wrapper.client import YtClient
 
@@ -24,15 +24,16 @@ class YtLocalContainer(DockerContainer):
         ]
         self.with_exposed_ports(80, 8002)
 
-    def get_client(self) -> YtClient:
+    def get_client(self, config: Optional[Dict[str, Any]] = None) -> YtClient:
         return YtClient(
             proxy=f"http://{self.get_container_host_ip()}:{self.get_exposed_port(YtLocalContainer.PORT_HTTP)}",
+            config=config,
         )
 
-    def get_client_rpc(self) -> YtClient:
+    def get_client_rpc(self, config: Optional[Dict[str, Any]]) -> YtClient:
         return YtClient(
             proxy=f"http://{self.get_container_host_ip()}:{self.get_exposed_port(YtLocalContainer.PORT_RPC)}",
-            config={"backend": "rpc"},
+            config={**config, "backend": "rpc"},
         )
 
     def check_container_is_ready(self) -> None:
