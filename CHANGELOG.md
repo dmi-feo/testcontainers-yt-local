@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.6.0 (2024-05-06)
+
+[Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.5.0...0.6.0)
+
+### Changes
+
+- Maybe now?. [948b7d2](https://github.com/dmi-feo/testcontainers-yt-local/commit/948b7d25ac977e904ffad84479e425aef8a3b88f)
+    
+- Revert "one more release fix". [a31aa8b](https://github.com/dmi-feo/testcontainers-yt-local/commit/a31aa8b669655e2c8fa6179c658d01811771ccb5)
+    
+  This reverts commit ece38d6a39febda74ccbabadc00cee275a29eb57.
+
 ## 0.5.0 (2024-05-06)
 
 [Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.4.0...0.5.0)
