@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.0 (2024-05-06)
+
+[Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.3.0...0.4.0)
+
+### Changes
+
+- Maybe fix pypi. [e2f7515](https://github.com/dmi-feo/testcontainers-yt-local/commit/e2f751530dbe7db1cd1a4ca8e7ffc6233fecc63f)
+    
+
 ## 0.3.0 (2024-05-06)
 
 [Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.2.0...0.3.0)
