@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.2.0 (2024-05-06)
+
+[Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.1.0...0.2.0)
+
+### Changes
+
+- Fix pypi. [dbb2700](https://github.com/dmi-feo/testcontainers-yt-local/commit/dbb2700e2f9c4ca3abc204d6177d81188d90bf9a)
+    
+- Pypi publishing. [4896afd](https://github.com/dmi-feo/testcontainers-yt-local/commit/4896afd99035bd342e9ba84ba1603c1774173324)
+    
+- Get_client: config override. [22e758b](https://github.com/dmi-feo/testcontainers-yt-local/commit/22e758b9cf20aadeeabe7e2cc46e203a23698bfc)
+    
+- Add test_two_containers. [b801be6](https://github.com/dmi-feo/testcontainers-yt-local/commit/b801be622ee8882534d80f437c639f18047c77a1)
+    
+- Port constants. [704849d](https://github.com/dmi-feo/testcontainers-yt-local/commit/704849ddc117cf05ce213d5d1b17144376735f97)
+    
+- Fix repo url in changelog-config. [87478a8](https://github.com/dmi-feo/testcontainers-yt-local/commit/87478a8b0eb1f46826fdd358995891bcc0cc4e9e)
+    
+- Changelog-config. [8b32bd2](https://github.com/dmi-feo/testcontainers-yt-local/commit/8b32bd298110557a0053203aaec8c2a8daa014de)
+    
+
 ## 0.1.0 (2024-05-05)
 
 [Compare the full difference.](/compare/0.0.0...0.1.0)
