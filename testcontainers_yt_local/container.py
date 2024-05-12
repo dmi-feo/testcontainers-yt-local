@@ -24,15 +24,23 @@ class YtLocalContainer(DockerContainer):
         ]
         self.with_exposed_ports(80, 8002)
 
+    @property
+    def proxy_url_http(self):
+        return f"http://{self.get_container_host_ip()}:{self.get_exposed_port(YtLocalContainer.PORT_HTTP)}"
+
+    @property
+    def proxy_url_rpc(self):
+        return f"http://{self.get_container_host_ip()}:{self.get_exposed_port(YtLocalContainer.PORT_RPC)}"
+
     def get_client(self, config: Optional[Dict[str, Any]] = None) -> YtClient:
         return YtClient(
-            proxy=f"http://{self.get_container_host_ip()}:{self.get_exposed_port(YtLocalContainer.PORT_HTTP)}",
+            proxy=self.proxy_url_http,
             config=config,
         )
 
     def get_client_rpc(self, config: Optional[Dict[str, Any]]) -> YtClient:
         return YtClient(
-            proxy=f"http://{self.get_container_host_ip()}:{self.get_exposed_port(YtLocalContainer.PORT_RPC)}",
+            proxy=self.proxy_url_rpc,
             config={**config, "backend": "rpc"},
         )
 
