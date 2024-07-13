@@ -13,6 +13,12 @@ dependencies = [
     "ytsaurus-client < 0.14",
 ]
 
+[project.urls]
+Homepage = "https://github.com/dmi-feo/testcontainers-yt-local"
+Repository = "https://github.com/dmi-feo/testcontainers-yt-local.git"
+Issues = "https://github.com/dmi-feo/testcontainers-yt-local/issues"
+Changelog = "https://github.com/dmi-feo/testcontainers-yt-local/blob/main/CHANGELOG.md"
+
 [project.optional-dependencies]
 pytest = [
     "pytest < 9",
