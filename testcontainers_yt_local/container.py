@@ -1,9 +1,17 @@
 from typing import Any, Optional, Dict
 
 from yt.wrapper.client import YtClient
+from deepmerge import always_merger
 
 from testcontainers.core.container import DockerContainer
 from testcontainers.core.waiting_utils import wait_container_is_ready
+
+
+DEFAULT_CLIENT_CONFIG = {
+    "proxy": {
+        "enable_proxy_discovery": False,
+    }
+}
 
 
 class YtLocalContainer(DockerContainer):
@@ -33,15 +41,17 @@ class YtLocalContainer(DockerContainer):
         return f"http://{self.get_container_host_ip()}:{self.get_exposed_port(YtLocalContainer.PORT_RPC)}"
 
     def get_client(self, config: Optional[Dict[str, Any]] = None) -> YtClient:
+        effective_config = always_merger.merge(DEFAULT_CLIENT_CONFIG, config or {})
         return YtClient(
             proxy=self.proxy_url_http,
-            config=config,
+            config=effective_config,
         )
 
     def get_client_rpc(self, config: Optional[Dict[str, Any]]) -> YtClient:
+        effective_config = always_merger.merge(DEFAULT_CLIENT_CONFIG, config or {})
         return YtClient(
             proxy=self.proxy_url_rpc,
-            config={**config, "backend": "rpc"},
+            config={**effective_config, "backend": "rpc"},
         )
 
     def check_container_is_ready(self) -> None:
