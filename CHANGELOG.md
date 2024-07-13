@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.10.0 (2024-07-13)
+
+[Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.9.0...0.10.0)
+
+### Changes
+
+- Add primitive external yt support (#20). [6554b7b](https://github.com/dmi-feo/testcontainers-yt-local/commit/6554b7b75f88095b9c38429fe1249dcf45f6040c)
+    
+
 ## 0.9.0 (2024-07-13)
 
 [Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.8.0...0.9.0)
