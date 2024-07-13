@@ -1,17 +1,17 @@
 import requests
 
-from testcontainers_yt_local.container import YtLocalContainer
+from testcontainers_yt_local.container import YtContainerInstance, YtExternalInstance
 
 
 def test_docker_run_yt():
-    with YtLocalContainer() as yt:
+    with YtContainerInstance() as yt:
         url = f"{yt.proxy_url_http}/ping"
         r = requests.get(url)
         assert r.status_code == 200
 
 
 def test_list_root_node():
-    with YtLocalContainer() as yt:
+    with YtContainerInstance() as yt:
         url = f"{yt.proxy_url_http}/api/v3/list"
         r = requests.get(url, params={"path": "/"})
         assert r.status_code == 200
@@ -19,7 +19,7 @@ def test_list_root_node():
 
 
 def test_two_containers():
-    with YtLocalContainer() as yt1, YtLocalContainer() as yt2:
+    with YtContainerInstance() as yt1, YtContainerInstance() as yt2:
         for yt in (yt1, yt2):
             url = f"{yt.proxy_url_http}/ping"
             r = requests.get(url)
@@ -27,7 +27,7 @@ def test_two_containers():
 
 
 def test_yt_client_config_override():
-    with YtLocalContainer() as yt:
+    with YtContainerInstance() as yt:
         yt_cli = yt.get_client(config={"prefix": "//tmp"})
         assert yt_cli.config["prefix"] == "//tmp"
 
@@ -42,7 +42,7 @@ def test_write_table():
     table_path = "//tmp/some_table"
     table_values = [{"some_field": "some_value"}]
 
-    with YtLocalContainer() as yt:
+    with YtContainerInstance() as yt:
         yt_cli = yt.get_client()
         yt_cli.create("table", table_path, attributes={
             "schema": [{"name": "some_field", "type": "string"}]
@@ -52,3 +52,12 @@ def test_write_table():
 
     assert len(data) == 1
     assert data == table_values
+
+
+def test_external_yt():
+    with YtContainerInstance() as yt_container:
+        with YtExternalInstance(proxy_url=yt_container.proxy_url_http, token="") as yt_ext:
+            yt_cli_container = yt_container.get_client()
+            yt_cli_ext = yt_ext.get_client()
+
+            assert yt_cli_container.list("/") == yt_cli_ext.list("/")

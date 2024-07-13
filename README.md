@@ -16,10 +16,10 @@ pip install "testcontainers-yt-local[pytest]"
 
 ## Usage
 ```python
-from testcontainers_yt_local.container import YtLocalContainer
+from testcontainers_yt_local.container import YtContainerInstance
 
 
-with YtLocalContainer() as yt:
+with YtContainerInstance() as yt:
     yt_cli = yt.get_client()
     print(yt_cli.list("/"))
 ```
