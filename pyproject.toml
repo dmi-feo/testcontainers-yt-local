@@ -11,6 +11,8 @@ dynamic = ["version"]
 dependencies = [
     "testcontainers < 3.8",
     "ytsaurus-client < 0.14",
+    "ytsaurus-yson < 0.5",
+    "deepmerge < 1.2",
 ]
 
 [project.urls]

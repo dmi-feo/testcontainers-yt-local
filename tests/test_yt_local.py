@@ -36,3 +36,19 @@ def test_with_fixture(yt_cluster_function):
     url = f"{yt_cluster_function.proxy_url_http}/ping"
     r = requests.get(url)
     assert r.status_code == 200
+
+
+def test_write_table():
+    table_path = "//tmp/some_table"
+    table_values = [{"some_field": "some_value"}]
+
+    with YtLocalContainer() as yt:
+        yt_cli = yt.get_client()
+        yt_cli.create("table", table_path, attributes={
+            "schema": [{"name": "some_field", "type": "string"}]
+        })
+        yt_cli.write_table(table_path, table_values)
+        data = list(yt_cli.read_table(table_path))
+
+    assert len(data) == 1
+    assert data == table_values
