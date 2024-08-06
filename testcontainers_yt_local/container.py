@@ -71,16 +71,17 @@ class YtContainerInstance(DockerContainer, YtBaseInstance):
         if image is None:
             if use_ng_image:
                 image = DEFAULT_IMAGES["ytsaurus-local-ng"]
+                self._command = []
             else:
                 image = DEFAULT_IMAGES["ytsaurus-local-original"]
+                self._command = [
+                    "--fqdn", "localhost",
+                    "--rpc-proxy-count", "1",
+                    "--rpc-proxy-port", str(self.PORT_RPC),
+                    "--node-count", "1",
+                ]
 
         super().__init__(image=image, **kwargs)
-        self._command = [
-            "--fqdn", "localhost",
-           "--rpc-proxy-count", "1",
-            "--rpc-proxy-port", str(self.PORT_RPC),
-            "--node-count", "1",
-        ]
         self.with_exposed_ports(80, 8002)
 
     @property
@@ -106,7 +107,7 @@ class YtContainerInstance(DockerContainer, YtBaseInstance):
         )
 
     def check_container_is_ready(self) -> None:
-        assert set(self.get_client().list("/")) == {"home", "sys", "tmp", "trash"}
+        assert {"home", "sys", "tmp"}.issubset(set(self.get_client().list("/")))
 
     @wait_container_is_ready(AssertionError)
     def _wait_container_is_ready(self) -> None:

@@ -61,3 +61,10 @@ def test_external_yt():
             yt_cli_ext = yt_ext.get_client()
 
             assert yt_cli_container.list("/") == yt_cli_ext.list("/")
+
+
+def test_ng_image_ping():
+    with YtContainerInstance(use_ng_image=True) as yt:
+        url = f"{yt.proxy_url_http}/ping"
+        r = requests.get(url)
+        assert r.status_code == 200
