@@ -16,6 +16,11 @@ DEFAULT_CLIENT_CONFIG = {
 }
 
 
+DEFAULT_IMAGES = {
+    "ytsaurus-local-original": "ghcr.io/ytsaurus/local:stable",
+    "ytsaurus-local-ng": "ghcr.io/dmi-feo/ytsaurus-local:0.1.0",
+}
+
 class YtBaseInstance(abc.ABC):
     @abc.abstractmethod
     def __enter__(self) -> Self:
@@ -41,9 +46,34 @@ class YtContainerInstance(DockerContainer, YtBaseInstance):
 
     def __init__(
         self,
-        image: str = "ytsaurus/local:stable",
+        image: Optional[str] = None,
+        use_ng_image: Optional[bool] = None,
+        enable_cri_jobs: bool = False,
+        enable_auth: bool = False,
         **kwargs: Any,
     ):
+        assert (image is None) or (use_ng_image is None), "Set either image or use_ng_image param"
+
+        if enable_auth or enable_cri_jobs:
+            assert (image is None) or (use_ng_image is True), "Only ng image supports CRI jobs and auth"
+
+        if enable_cri_jobs:
+            if "privileged" in kwargs:
+                assert kwargs["privileged"] is False, "CRI jobs require privileged mode"
+            else:
+                kwargs["privileged"] = True
+
+            self.env["YTLOCAL_CRI_ENABLED"] = "1"
+
+        if enable_auth:
+            self.env["YTLOCAL_AUTH_ENABLED"] = "1"
+
+        if image is None:
+            if use_ng_image:
+                image = DEFAULT_IMAGES["ytsaurus-local-ng"]
+            else:
+                image = DEFAULT_IMAGES["ytsaurus-local-original"]
+
         super().__init__(image=image, **kwargs)
         self._command = [
             "--fqdn", "localhost",
