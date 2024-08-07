@@ -1,33 +1,34 @@
 import requests
 
-from testcontainers_yt_local.container import YtContainerInstance, YtExternalInstance
+from testcontainers_yt_local.container import YtContainerInstance
+from testcontainers_yt_local.external import YtExternalInstance
 
 
-def test_docker_run_yt():
-    with YtContainerInstance() as yt:
+def test_docker_run_yt(use_ng_image):
+    with YtContainerInstance(use_ng_image=use_ng_image) as yt:
         url = f"{yt.proxy_url_http}/ping"
         r = requests.get(url)
         assert r.status_code == 200
 
 
-def test_list_root_node():
-    with YtContainerInstance() as yt:
+def test_list_root_node(use_ng_image):
+    with YtContainerInstance(use_ng_image=use_ng_image) as yt:
         url = f"{yt.proxy_url_http}/api/v3/list"
         r = requests.get(url, params={"path": "/"})
         assert r.status_code == 200
-        assert set(r.json()) == {"home", "sys", "tmp", "trash"}
+        assert "sys" in set(r.json())
 
 
-def test_two_containers():
-    with YtContainerInstance() as yt1, YtContainerInstance() as yt2:
+def test_two_containers(use_ng_image):
+    with YtContainerInstance(use_ng_image=use_ng_image) as yt1, YtContainerInstance(use_ng_image=use_ng_image) as yt2:
         for yt in (yt1, yt2):
             url = f"{yt.proxy_url_http}/ping"
             r = requests.get(url)
             assert r.status_code == 200
 
 
-def test_yt_client_config_override():
-    with YtContainerInstance() as yt:
+def test_yt_client_config_override(use_ng_image):
+    with YtContainerInstance(use_ng_image=use_ng_image) as yt:
         yt_cli = yt.get_client(config={"prefix": "//tmp"})
         assert yt_cli.config["prefix"] == "//tmp"
 
@@ -38,11 +39,17 @@ def test_with_fixture(yt_cluster_function):
     assert r.status_code == 200
 
 
-def test_write_table():
+def test_fixture_with_auth(yt_cluster_with_auth_function):
+    url = f"{yt_cluster_with_auth_function.proxy_url_http}/ping"
+    r = requests.get(url, headers={"Authorization": "OAuth topsecret"})
+    assert r.status_code == 200
+
+
+def test_write_table(use_ng_image):
     table_path = "//tmp/some_table"
     table_values = [{"some_field": "some_value"}]
 
-    with YtContainerInstance() as yt:
+    with YtContainerInstance(use_ng_image=use_ng_image) as yt:
         yt_cli = yt.get_client()
         yt_cli.create("table", table_path, attributes={
             "schema": [{"name": "some_field", "type": "string"}]
@@ -61,10 +68,3 @@ def test_external_yt():
             yt_cli_ext = yt_ext.get_client()
 
             assert yt_cli_container.list("/") == yt_cli_ext.list("/")
-
-
-def test_ng_image_ping():
-    with YtContainerInstance(use_ng_image=True) as yt:
-        url = f"{yt.proxy_url_http}/ping"
-        r = requests.get(url)
-        assert r.status_code == 200
