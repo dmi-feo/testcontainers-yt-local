@@ -46,7 +46,7 @@ testcontainers_yt_local = "testcontainers_yt_local.fixtures"
 version = {attr = "testcontainers_yt_local.__version__"}
 
 [tool.bumpversion]
-current_version = "0.11.0"
+current_version = "0.12.0"
 commit = true
 commit_args = "--no-verify"
 tag = true
