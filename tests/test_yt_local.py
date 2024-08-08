@@ -45,6 +45,12 @@ def test_fixture_with_auth(yt_cluster_with_auth_function):
     assert r.status_code == 200
 
 
+def test_fixture_with_cri_jobs(yt_cluster_with_cri_jobs_function):
+    url = f"{yt_cluster_with_cri_jobs_function.proxy_url_http}/ping"
+    r = requests.get(url)
+    assert r.status_code == 200
+
+
 def test_write_table(use_ng_image):
     table_path = "//tmp/some_table"
     table_values = [{"some_field": "some_value"}]
