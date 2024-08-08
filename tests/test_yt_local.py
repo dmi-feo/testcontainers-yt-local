@@ -45,8 +45,8 @@ def test_fixture_with_auth(yt_cluster_with_auth_function):
     assert r.status_code == 200
 
 
-def test_fixture_with_cri_jobs(yt_cluster_with_cri_jobs):
-    url = f"{yt_cluster_with_cri_jobs.proxy_url_http}/ping"
+def test_fixture_with_cri_jobs(yt_cluster_with_cri_jobs_function):
+    url = f"{yt_cluster_with_cri_jobs_function.proxy_url_http}/ping"
     r = requests.get(url)
     assert r.status_code == 200
 
