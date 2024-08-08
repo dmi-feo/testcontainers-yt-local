@@ -67,6 +67,17 @@ def test_write_table(use_ng_image):
     assert data == table_values
 
 
+def test_write_file(use_ng_image):
+    file_path = "//tmp/some_file"
+    content = b"hello world"
+    with YtContainerInstance(use_ng_image=use_ng_image) as yt:
+        yt_cli = yt.get_client()
+        yt_cli.create("file", file_path)
+        yt_cli.write_file(file_path, content)
+
+        assert yt_cli.read_file(file_path).read() == content
+
+
 def test_external_yt():
     with YtContainerInstance() as yt_container:
         with YtExternalInstance(proxy_url=yt_container.proxy_url_http, token="") as yt_ext:
