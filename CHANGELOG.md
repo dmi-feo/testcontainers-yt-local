@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.12.0 (2024-08-08)
+
+[Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.11.0...0.12.0)
+
+### Changes
+
+- Some fixes (#25). [7550d44](https://github.com/dmi-feo/testcontainers-yt-local/commit/7550d447a7ab09e0bca2d923577b303961f77506)
+    
+- Add test with cri and fix cri fixtures (#24). [27a9b38](https://github.com/dmi-feo/testcontainers-yt-local/commit/27a9b387c65d35ae5d99293d7e54d4b46b9ea896)
+    
+
 ## 0.11.0 (2024-08-08)
 
 [Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.10.0...0.11.0)
