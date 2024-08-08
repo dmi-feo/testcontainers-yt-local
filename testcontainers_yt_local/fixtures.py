@@ -12,6 +12,7 @@ def _get_yt_cluster_fixture(scope: str, auth_enabled: bool = False, cri_jobs_ena
                 use_ng_image=use_ng_image,
                 enable_auth=auth_enabled,
                 enable_cri_jobs=cri_jobs_enabled,
+                privileged=cri_jobs_enabled,
         ) as _yt_cluster:
             yield _yt_cluster
 
