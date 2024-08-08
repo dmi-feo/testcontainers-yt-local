@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.11.0 (2024-08-08)
+
+[Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.10.0...0.11.0)
+
+### Changes
+
+- Support ng image with cri jobs and auth (#22). [fa647c5](https://github.com/dmi-feo/testcontainers-yt-local/commit/fa647c50298ee24a224a805bfc668aa2e6ac7dd0)
+    
+
 ## 0.10.0 (2024-07-13)
 
 [Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.9.0...0.10.0)
