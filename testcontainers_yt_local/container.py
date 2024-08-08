@@ -63,15 +63,16 @@ class YtContainerInstance(DockerContainer, YtBaseInstance):
         if image is None:
             if use_ng_image:
                 self.image = DEFAULT_IMAGES["ytsaurus-local-ng"]
-                self._command = None
             else:
                 self.image = DEFAULT_IMAGES["ytsaurus-local-original"]
-                self._command = [
-                    "--fqdn", "localhost",
-                    "--rpc-proxy-count", "1",
-                    "--rpc-proxy-port", str(self.PORT_RPC),
-                    "--node-count", "1",
-                ]
+
+        if not self._use_ng_image:
+            self._command = [
+                "--fqdn", "localhost",
+                "--rpc-proxy-count", "1",
+                "--rpc-proxy-port", str(self.PORT_RPC),
+                "--node-count", "1",
+            ]
 
         self.with_exposed_ports(80, 8002)
 
