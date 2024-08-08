@@ -42,7 +42,7 @@ class YtContainerInstance(DockerContainer, YtBaseInstance):
         privileged: bool = False,
         **kwargs: Any,
     ):
-        super().__init__(image=image, **kwargs)
+        super().__init__(image=image, privileged=privileged, **kwargs)
 
         self._use_ng_image = use_ng_image
         self._enable_cri_jobs = enable_cri_jobs
@@ -52,9 +52,6 @@ class YtContainerInstance(DockerContainer, YtBaseInstance):
         self._validate_params()
 
         if enable_cri_jobs:
-            if "privileged" not in kwargs:
-                kwargs["privileged"] = True
-
             self.env["YTLOCAL_CRI_ENABLED"] = "1"
 
         if enable_auth:
