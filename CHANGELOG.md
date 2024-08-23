@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.13.0 (2024-08-24)
+
+[Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.12.0...0.13.0)
+
+### Changes
+
+- Enhance yt client configuration (#28). [c73a846](https://github.com/dmi-feo/testcontainers-yt-local/commit/c73a84673831863ee33b9771724e6e43c6e4c2b0)
+    
+
 ## 0.12.0 (2024-08-08)
 
 [Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.11.0...0.12.0)
