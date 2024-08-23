@@ -1,6 +1,9 @@
+import copy
+import os
 import logging
 from typing import Any, Optional, Dict
 
+import yt.yson
 from yt.wrapper.client import YtClient
 from deepmerge import always_merger
 from typing_extensions import Self
@@ -17,7 +20,8 @@ LOGGER = logging.getLogger(__name__)
 DEFAULT_CLIENT_CONFIG = {
     "proxy": {
         "enable_proxy_discovery": False,
-    }
+    },
+    "is_local_mode": True,
 }
 
 
@@ -40,6 +44,7 @@ class YtContainerInstance(DockerContainer, YtBaseInstance):
         enable_cri_jobs: bool = False,
         enable_auth: bool = False,
         privileged: bool = False,
+        set_yt_config_env_var: bool = False,
         **kwargs: Any,
     ):
         super().__init__(image=image, privileged=privileged, **kwargs)
@@ -48,6 +53,7 @@ class YtContainerInstance(DockerContainer, YtBaseInstance):
         self._enable_cri_jobs = enable_cri_jobs
         self._enable_auth = enable_auth
         self._privileged = privileged
+        self._set_yt_config_env_var = set_yt_config_env_var
 
         self._validate_params()
 
@@ -91,7 +97,7 @@ class YtContainerInstance(DockerContainer, YtBaseInstance):
     def proxy_url_rpc(self):
         return f"http://{self.get_container_host_ip()}:{self.get_exposed_port(self.PORT_RPC)}"
 
-    def get_client(self, config: Optional[Dict[str, Any]] = None, token: Optional[str] = None) -> YtClient:
+    def get_client(self, config: Optional[Dict[str, Any]] = None, token: str = "") -> YtClient:
         effective_config = always_merger.merge(DEFAULT_CLIENT_CONFIG, config or {})
         return YtClient(
             proxy=self.proxy_url_http,
@@ -124,9 +130,19 @@ class YtContainerInstance(DockerContainer, YtBaseInstance):
     def _wait_container_is_ready(self) -> None:
         self.check_container_is_ready()
 
+    def set_yt_config_env_var(self):
+        full_config = copy.deepcopy(DEFAULT_CLIENT_CONFIG)
+        full_config["proxy"]["url"] = self.proxy_url_http
+        full_config["token"] = ""
+        os.environ["YT_CONFIG_PATCHES"] = yt.yson.dumps(full_config).decode()
+
     def start(self) -> Self:
         super().start()
         self._wait_container_is_ready()
+
+        if self._set_yt_config_env_var:
+            self.set_yt_config_env_var()
+
         return self
 
 
