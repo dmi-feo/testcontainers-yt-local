@@ -27,7 +27,7 @@ DEFAULT_CLIENT_CONFIG = {
 
 DEFAULT_IMAGES = {
     "ytsaurus-local-original": "ghcr.io/ytsaurus/local:stable",
-    "ytsaurus-local-ng": "ghcr.io/dmi-feo/ytsaurus-local:0.1.0",
+    "ytsaurus-local-ng": "ghcr.io/dmi-feo/ytsaurus-local:0.2.0",
 }
 
 NG_IMAGE_ADMIN_TOKEN = "topsecret"
