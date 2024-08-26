@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.15.0 (2024-08-26)
+
+[Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.14.0...0.15.0)
+
+### Changes
+
+- Allow using custom ng image (#32). [4d93a4b](https://github.com/dmi-feo/testcontainers-yt-local/commit/4d93a4b106395517891021766ec03afae7de6433)
+    
+
 ## 0.14.0 (2024-08-25)
 
 [Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.13.0...0.14.0)
