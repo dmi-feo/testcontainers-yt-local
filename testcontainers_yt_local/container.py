@@ -80,10 +80,8 @@ class YtContainerInstance(DockerContainer, YtBaseInstance):
         self.with_exposed_ports(80, 8002)
 
     def _validate_params(self):
-        assert (self.image is None) or (self._use_ng_image is None), "Set either image or use_ng_image param"
-
         if self._enable_auth or self._enable_cri_jobs:
-            assert (self.image is None) or (self._use_ng_image is True), "Only ng image supports CRI jobs and auth"
+            assert self._use_ng_image is True, "Only ng image supports CRI jobs and auth"
 
         if self._enable_cri_jobs:
             assert self._privileged is True, "CRI jobs require privileged mode"
