@@ -27,7 +27,7 @@ DEFAULT_CLIENT_CONFIG = {
 
 DEFAULT_IMAGES = {
     "ytsaurus-local-original": "ghcr.io/ytsaurus/local:stable",
-    "ytsaurus-local-ng": "ghcr.io/dmi-feo/ytsaurus-local:0.3.0",
+    "ytsaurus-local-ng": "ghcr.io/dmi-feo/ytsaurus-local:0.4.0",
 }
 
 NG_IMAGE_ADMIN_TOKEN = "topsecret"
@@ -118,7 +118,9 @@ class YtContainerInstance(DockerContainer, YtBaseInstance):
             assert "sys" in yt_client.list("/")
             if self._use_ng_image:
                 marker = "//sys/@ytsaurus_local_ready"
-                assert yt_client.exists(marker) and yt_client.get(marker) is True
+                print("111", yt_client.exists(marker))
+                print("222", yt_client.get(marker))
+                assert yt_client.exists(marker) and yt_client.get(marker)
         except AssertionError:
             raise
         except Exception as exc:
