@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.16.0 (2024-08-27)
+
+[Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.15.0...0.16.0)
+
+### Changes
+
+- Up ytsaurus-local image (#34). [dee4b2d](https://github.com/dmi-feo/testcontainers-yt-local/commit/dee4b2ddc5dbeb2591b5d9a6f3957383f74a4c29)
+    
+
 ## 0.15.0 (2024-08-26)
 
 [Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.14.0...0.15.0)
