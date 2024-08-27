@@ -27,7 +27,7 @@ DEFAULT_CLIENT_CONFIG = {
 
 DEFAULT_IMAGES = {
     "ytsaurus-local-original": "ghcr.io/ytsaurus/local:stable",
-    "ytsaurus-local-ng": "ghcr.io/dmi-feo/ytsaurus-local:0.2.0",
+    "ytsaurus-local-ng": "ghcr.io/dmi-feo/ytsaurus-local:0.4.0",
 }
 
 NG_IMAGE_ADMIN_TOKEN = "topsecret"
@@ -35,7 +35,7 @@ NG_IMAGE_ADMIN_TOKEN = "topsecret"
 
 class YtContainerInstance(DockerContainer, YtBaseInstance):
     PORT_HTTP = 80
-    PORT_RPC = 8002
+    PORT_RPC = 20069
 
     def __init__(
         self,
@@ -77,7 +77,7 @@ class YtContainerInstance(DockerContainer, YtBaseInstance):
                 "--node-count", "1",
             ]
 
-        self.with_exposed_ports(80, 8002)
+        self.with_exposed_ports(self.PORT_HTTP, self.PORT_RPC)
 
     def _validate_params(self):
         if self._enable_auth or self._enable_cri_jobs:
@@ -117,7 +117,8 @@ class YtContainerInstance(DockerContainer, YtBaseInstance):
             yt_client = self.get_client(**yt_client_kwargs)
             assert "sys" in yt_client.list("/")
             if self._use_ng_image:
-                assert not yt_client.exists("//sys/@provision_lock")
+                marker = "//sys/@ytsaurus_local_ready"
+                assert yt_client.exists(marker) and yt_client.get(marker)
         except AssertionError:
             raise
         except Exception as exc:
