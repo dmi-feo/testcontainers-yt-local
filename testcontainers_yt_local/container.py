@@ -118,8 +118,6 @@ class YtContainerInstance(DockerContainer, YtBaseInstance):
             assert "sys" in yt_client.list("/")
             if self._use_ng_image:
                 marker = "//sys/@ytsaurus_local_ready"
-                print("111", yt_client.exists(marker))
-                print("222", yt_client.get(marker))
                 assert yt_client.exists(marker) and yt_client.get(marker)
         except AssertionError:
             raise
