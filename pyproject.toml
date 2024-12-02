@@ -39,6 +39,10 @@ release = [
 [tool.setuptools.packages.find]
 where = ["."]
 
+
+[tool.setuptools.package-data]
+"tractorun" = ["py.typed"]
+
 [project.entry-points.pytest11]
 testcontainers_yt_local = "testcontainers_yt_local.fixtures"
 
