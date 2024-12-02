@@ -41,7 +41,7 @@ where = ["."]
 
 
 [tool.setuptools.package-data]
-"tractorun" = ["py.typed"]
+"testcontainers_yt_local" = ["py.typed"]
 
 [project.entry-points.pytest11]
 testcontainers_yt_local = "testcontainers_yt_local.fixtures"
