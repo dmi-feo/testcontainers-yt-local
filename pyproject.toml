@@ -6,11 +6,11 @@ keywords = ["testing", "docker", "test automation", "yt", "ytsaurus", "pytest"]
 authors = [
     {name = "Dmitriy Fedorov"},
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 license = {text = "Apache 2.0"}
 dynamic = ["version"]
 dependencies = [
-    "testcontainers < 3.8",
+    "testcontainers ~= 4.10.0",
     "ytsaurus-client < 0.14",
     "ytsaurus-yson < 0.5",
     "deepmerge < 1.2",
