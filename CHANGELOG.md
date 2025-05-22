@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.17.0 (2025-05-23)
+
+[Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.16.0...0.17.0)
+
+### Changes
+
+- Make project pep-561 compatible (#36). [b8378c3](https://github.com/dmi-feo/testcontainers-yt-local/commit/b8378c394c5dcad5667c6c7ac0db56d163c21ba0)
+    
+  * Make project pep-561 compatible
+
+  * fix adding py.typed to pyproject
+- Up python to 3.10 in test workflow. [443e2ca](https://github.com/dmi-feo/testcontainers-yt-local/commit/443e2ca53151f6d916c59221e40d69c5c3c8d77d)
+    
+- Check that home and tmp dirs created. [06e6a44](https://github.com/dmi-feo/testcontainers-yt-local/commit/06e6a44d049cbe373ad0072c106711fba7de7eeb)
+    
+- Up min python + deps. [5b9fdf9](https://github.com/dmi-feo/testcontainers-yt-local/commit/5b9fdf919ef1f46af37a4a35c444b6d6698309b4)
+    
+
 ## 0.16.0 (2024-08-27)
 
 [Compare the full difference.](https://github.com/dmi-feo/testcontainers-yt-local/compare/0.15.0...0.16.0)
