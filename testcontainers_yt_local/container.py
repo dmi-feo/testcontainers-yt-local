@@ -17,7 +17,7 @@ from testcontainers_yt_local.base import YtBaseInstance
 LOGGER = logging.getLogger(__name__)
 
 
-DEFAULT_CLIENT_CONFIG = {
+DEFAULT_CLIENT_CONFIG: Dict[str, Any] = {
     "proxy": {
         "enable_proxy_discovery": False,
     },
@@ -115,7 +115,7 @@ class YtContainerInstance(DockerContainer, YtBaseInstance):
 
         try:
             yt_client = self.get_client(**yt_client_kwargs)
-            assert "sys" in yt_client.list("/")
+            assert {"sys", "home", "tmp"}.issubset(set(yt_client.list("/")))
             if self._use_ng_image:
                 marker = "//sys/@ytsaurus_local_ready"
                 assert yt_client.exists(marker) and yt_client.get(marker)
