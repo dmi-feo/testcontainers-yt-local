@@ -1,18 +1,16 @@
 import copy
-import os
 import logging
-from typing import Any, Optional, Dict
+import os
+from typing import Any, Dict, Optional
 
 import yt.yson
-from yt.wrapper.client import YtClient
 from deepmerge import always_merger
-from typing_extensions import Self
-
 from testcontainers.core.container import DockerContainer
 from testcontainers.core.waiting_utils import wait_container_is_ready
+from typing_extensions import Self
+from yt.wrapper.client import YtClient
 
 from testcontainers_yt_local.base import YtBaseInstance
-
 
 LOGGER = logging.getLogger(__name__)
 
@@ -71,10 +69,14 @@ class YtContainerInstance(DockerContainer, YtBaseInstance):
 
         if not self._use_ng_image:
             self._command = [
-                "--fqdn", "localhost",
-                "--rpc-proxy-count", "1",
-                "--rpc-proxy-port", str(self.PORT_RPC),
-                "--node-count", "1",
+                "--fqdn",
+                "localhost",
+                "--rpc-proxy-count",
+                "1",
+                "--rpc-proxy-port",
+                str(self.PORT_RPC),
+                "--node-count",
+                "1",
             ]
 
         self.with_exposed_ports(self.PORT_HTTP, self.PORT_RPC)
@@ -85,7 +87,6 @@ class YtContainerInstance(DockerContainer, YtBaseInstance):
 
         if self._enable_cri_jobs:
             assert self._privileged is True, "CRI jobs require privileged mode"
-
 
     @property
     def proxy_url_http(self):

@@ -57,9 +57,7 @@ def test_write_table(use_ng_image):
 
     with YtContainerInstance(use_ng_image=use_ng_image) as yt:
         yt_cli = yt.get_client()
-        yt_cli.create("table", table_path, attributes={
-            "schema": [{"name": "some_field", "type": "string"}]
-        })
+        yt_cli.create("table", table_path, attributes={"schema": [{"name": "some_field", "type": "string"}]})
         yt_cli.write_table(table_path, table_values)
         data = list(yt_cli.read_table(table_path))
 
