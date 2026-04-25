@@ -1,4 +1,4 @@
-from typing import Any, Optional, Dict
+from typing import Any, Dict, Optional
 
 from typing_extensions import Self
 from yt.wrapper import YtClient
